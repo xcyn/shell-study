@@ -201,6 +201,7 @@
 ### 文本三剑客
 + grep | egrep 过滤器
 + 语法 grep [option] [pattern] [file,file....]
++ egrep 相当于 grep -E
 + 选项
   + -v 反相匹配
   + -i 忽略大小
@@ -213,6 +214,61 @@
 find /sbin -perm +700 |ls -l       #这个命令是错误的
 find /sbin -perm +700 |xargs ls -l   #这样才是正确的
 ```
+
++ sed 流编辑器
++ man sed （说明）
++ 第一种形式: stdout | sed [option] "pattern command"
++ 第二种形式: sed[option] "pattern command" file
++ 选项
+  + -n 只打印模式匹配行
+  + -e 允许同一行支持多条命令
+  + -f 编辑动作保存在文件中，指定文件执行
+  + -r 支持扩展正则表达式
+  + -i 直接修改文件内容
++ pattern 模式
+  + /pattern1/ --- 匹配到pattern1开始的所有内容 （常用）
+  ```
+  sed -n "/^ftp/p" file 打印file文件中第一个匹配到以ftp开头的行的所有内容
+  ```
+  + /pattern1/,/pattern2/ --- 匹配到pattern1开始到 匹配到pattern2 （常用）
+  ```
+  sed -n "/^ftp/,/^mail/p" file 打印file文件中第一个匹配到以ftp开头的行，到mail结束的内容
+  ```
++ command 参数
+  + p 打印
+  + d 删除
+  + 增加
+    + a   --- 匹配到的行后追加内容
+    + i   --- 匹配到的行前追加内容
+    + r   --- 将外部文件的内容追加到匹配到的行后面
+    + w   --- 将匹配到的行内容另存到其他文件中
+  + 修改
+    + s/pattern/string/ ----查找并替换符合pattern模式的字符串 （默认只替换第一个）
+    + s/pattern/string/g ----查找并替换符合pattern模式的字符串 （表示全部行全部替换）
+    + s/pattern/string/ig ----查找并替换符合pattern模式的字符串 （表示全部行全部替换，不分大小写）
+    + s/pattern/string/2g ----查找并替换符合pattern模式的字符串 （表示替换从第2个开始，往后所有的）
+    + s/pattern/string/2 ----查找并替换符合pattern模式的字符串 （表示替换前两个）
+  + 其他命令
+    + = 显示行号
+    ```
+      sed -n '/aaa/='  显示匹配 aaa 的行号为多少 (centos)
+      sed -n '' '/aaa/='  显示匹配 aaa 的行号为多少 (mac)
+      mac 和 centos下差异文档： https://blog.csdn.net/u011138533/article/details/52574144
+    ```
+  + 反向引用
+    + &s 和 \1 (相同，\1更灵活)
+    ```
+    sed -i 's/\(a..b\)/\1bp/g' 匹配axxb这种形式（aQQb|aWWb|aEEb|...）匹配成aQQbp|aWWbp|aEEbp|..
+    ```
+    ```
+    sed -i 's/\(a\)../\1bp/g' 匹配axxb这种形式（aQQ|aWW|aEE|...）匹配成abp|abp|abp|..
+    ```
+  + 注意事项： 在匹配模式中如果使用变量，要用双引号-> 例子 examples/example/sed1.sh
+
+  
+  
+
+
 
 
 
