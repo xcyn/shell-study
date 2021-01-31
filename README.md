@@ -192,11 +192,11 @@
     -mindepth n 根据几级目录开始搜索
     ```
     + 操作
-    -print 打印输出
-    -exec 接命令
-    ```
-    find ./test -exec rm -rf {} \;
-    ```
+      + -print 打印输出 （默认选项）
+      + -exec 接命令 (查到test目录，删除所有)
+      ```
+      find ./test -exec rm -rf {} \;
+      ```
     + 案例
     ```
     find . --path ./test1 -prune -o --path ./test2 --prune -o -type f
