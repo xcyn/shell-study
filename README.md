@@ -166,6 +166,7 @@
   done
   ```
   + 处理循环输出
+  ```
     for i in {1..20}
   do
     if [ $i == 10 ]; then
@@ -175,7 +176,7 @@
     fi
   done > echo.txt
   ```
-### 常用命令
+## 常用命令
   + find命令 语法: find[路径][选项][操作]
     + 选项
     ```
@@ -230,13 +231,17 @@ find /sbin -perm +700 |xargs ls -l   #这样才是正确的
   + -i 直接修改文件内容
 + pattern 模式
   + /pattern1/ --- 匹配到pattern1开始的所有内容 （常用）
+
   ```
-  sed -n "/^ftp/p" file 打印file文件中第一个匹配到以ftp开头的行的所有内容
+    sed -n "/^ftp/p" file 打印file文件中第一个匹配到以ftp开头的行的所有内容
   ```
+
   + /pattern1/,/pattern2/ --- 匹配到pattern1开始到 匹配到pattern2 （常用）
+
   ```
   sed -n "/^ftp/,/^mail/p" file 打印file文件中第一个匹配到以ftp开头的行，到mail结束的内容
   ```
+
 + command 参数
   + p 打印
   + d 删除
@@ -293,7 +298,6 @@ find /sbin -perm +700 |xargs ls -l   #这样才是正确的
     + 修饰符
       + - 左对齐
       + + 右对齐
-      + # 显示8进制在前面加0， 显示16进制在前面+0x
   + 两种匹配模式
     + 1、RegExp
       ```
