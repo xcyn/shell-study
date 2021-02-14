@@ -1,0 +1,1 @@
+nohup: ./mockServe/mysql1.conf: Permission denied
